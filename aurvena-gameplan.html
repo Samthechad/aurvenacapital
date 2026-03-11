@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AURVENA CAPITAL — Game Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #050505;
+    --bg2: #0a0a0a;
+    --bg3: #0f0f0f;
+    --border: #1a1a1a;
+    --text: #e8e8e0;
+    --muted: #444;
+    --muted2: #666;
+    --gold: #c9a84c;
+    --gold2: #e8c97a;
+    --red: #e05252;
+    --green: #52c97a;
+    --blue: #5289c9;
+    --mono: 'JetBrains Mono', monospace;
+    --serif: 'Playfair Display', serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* GRAIN OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* LAYOUT */
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  /* HEADER */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 40px 0 32px;
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .header-inner { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; }
+
+  .brand-name {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .brand-sub {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--muted2);
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+
+  .header-right { text-align: right; }
+
+  .tag {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 4px 10px;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  .stack-pills { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+
+  .pill {
+    font-size: 9px;
+    letter-spacing: 2px;
+    padding: 3px 8px;
+    border: 1px solid var(--border);
+    color: var(--muted2);
+    text-transform: uppercase;
+  }
+
+  /* MISSION BAR */
+  .mission-bar {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+    animation: fadeDown 0.8s 0.1s ease both;
+  }
+
+  .mission-text {
+    font-size: 11px;
+    color: var(--muted2);
+    letter-spacing: 1px;
+  }
+
+  .mission-text span { color: var(--text); }
+
+  /* SECTION TITLES */
+  .section { padding: 48px 0 0; animation: fadeUp 0.6s ease both; }
+
+  .section-label {
+    font-size: 9px;
+    letter-spacing: 5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* PHASE CARDS */
+  .phase {
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .phase:hover { border-color: #2a2a2a; }
+
+  .phase-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    cursor: pointer;
+    user-select: none;
+    gap: 16px;
+  }
+
+  .phase-header:hover { background: var(--bg3); }
+
+  .phase-left { display: flex; align-items: center; gap: 20px; }
+
+  .phase-num {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    min-width: 28px;
+  }
+
+  .phase-info {}
+
+  .phase-period {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+
+  .phase-title {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .phase-goal {
+    font-size: 11px;
+    color: var(--muted2);
+    margin-top: 2px;
+  }
+
+  .phase-right { display: flex; align-items: center; gap: 12px; }
+
+  .phase-progress-text {
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    min-width: 40px;
+    text-align: right;
+  }
+
+  .toggle-icon {
+    font-size: 12px;
+    color: var(--muted);
+    transition: transform 0.25s;
+    min-width: 12px;
+  }
+
+  .phase.open .toggle-icon { transform: rotate(180deg); }
+
+  .phase-body {
+    display: none;
+    border-top: 1px solid var(--border);
+    padding: 24px;
+  }
+
+  .phase.open .phase-body { display: block; }
+
+  /* PROGRESS BAR */
+  .progress-bar-wrap { margin-bottom: 20px; }
+
+  .progress-bar-bg {
+    height: 2px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  /* TASKS */
+  .task-group { margin-bottom: 20px; }
+
+  .task-group-label {
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .task {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid #0f0f0f;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .task:last-child { border-bottom: none; }
+  .task:hover { opacity: 0.8; }
+
+  .task-check {
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--muted);
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    font-size: 10px;
+  }
+
+  .task.done .task-check {
+    border-color: currentColor;
+    background: transparent;
+  }
+
+  .task.done .task-check::after {
+    content: '✓';
+    font-weight: 800;
+  }
+
+  .task-content { flex: 1; }
+
+  .task-text {
+    font-size: 12px;
+    letter-spacing: 0.3px;
+    line-height: 1.5;
+    transition: color 0.15s, text-decoration 0.15s;
+  }
+
+  .task.done .task-text {
+    text-decoration: line-through;
+    color: var(--muted);
+  }
+
+  .task-detail {
+    font-size: 10px;
+    color: var(--muted2);
+    margin-top: 3px;
+    line-height: 1.5;
+  }
+
+  .task-badge {
+    font-size: 8px;
+    letter-spacing: 2px;
+    padding: 2px 6px;
+    border: 1px solid;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  /* TECH STACK SECTION */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  @media (max-width: 600px) { .stack-grid { grid-template-columns: 1fr; } }
+
+  .stack-card {
+    border: 1px solid var(--border);
+    padding: 20px;
+    background: var(--bg3);
+  }
+
+  .stack-card-name {
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-bottom: 4px;
+  }
+
+  .stack-card-role {
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--muted2);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stack-card-items { list-style: none; }
+
+  .stack-card-items li {
+    font-size: 11px;
+    color: var(--muted2);
+    padding: 4px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .stack-card-items li::before {
+    content: '—';
+    color: var(--muted);
+    font-size: 10px;
+  }
+
+  /* TOOL SECTION */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  @media (max-width: 500px) { .tools-grid { grid-template-columns: 1fr; } }
+
+  .tool-card {
+    border: 1px solid var(--border);
+    padding: 16px 18px;
+    background: var(--bg3);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .tool-icon {
+    font-size: 18px;
+    min-width: 24px;
+    margin-top: 1px;
+  }
+
+  .tool-name {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 3px;
+  }
+
+  .tool-use {
+    font-size: 10px;
+    color: var(--muted2);
+    line-height: 1.5;
+  }
+
+  /* SEBI SECTION */
+  .sebi-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 500px) { .sebi-grid { grid-template-columns: 1fr; } }
+
+  .sebi-card {
+    border: 1px solid var(--border);
+    padding: 20px;
+    background: var(--bg3);
+  }
+
+  .sebi-card-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sebi-item {
+    font-size: 11px;
+    color: var(--muted2);
+    padding: 5px 0;
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid #0d0d0d;
+    line-height: 1.5;
+  }
+
+  .sebi-item:last-child { border-bottom: none; }
+
+  .sebi-item span { color: var(--text); min-width: 60px; flex-shrink: 0; }
+
+  /* DOMAIN SECTION */
+  .domain-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .domain-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    background: var(--bg3);
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .domain-name {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .domain-right { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+
+  .domain-priority {
+    font-size: 9px;
+    letter-spacing: 2px;
+    padding: 2px 8px;
+    border: 1px solid;
+    text-transform: uppercase;
+  }
+
+  .domain-note { font-size: 10px; color: var(--muted2); }
+
+  /* COUNTDOWN */
+  .countdown-bar {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    margin-top: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .countdown-label {
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .countdown-value {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--gold);
+  }
+
+  .countdown-sub { font-size: 10px; color: var(--muted2); margin-top: 2px; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    margin-top: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-brand { font-size: 11px; color: var(--muted); letter-spacing: 2px; }
+  .footer-brand span { color: var(--gold); }
+
+  .footer-right { font-size: 10px; color: var(--muted); letter-spacing: 1px; }
+
+  /* ANIMATIONS */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section:nth-child(2) { animation-delay: 0.05s; }
+  .section:nth-child(3) { animation-delay: 0.1s; }
+  .section:nth-child(4) { animation-delay: 0.15s; }
+  .section:nth-child(5) { animation-delay: 0.2s; }
+  .section:nth-child(6) { animation-delay: 0.25s; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); }
+
+  /* COLORS PER PHASE */
+  .c-gold { color: var(--gold); }
+  .c-green { color: var(--green); }
+  .c-blue { color: var(--blue); }
+  .c-red { color: var(--red); }
+  .c-white { color: var(--text); }
+
+  .b-gold { border-color: var(--gold); }
+  .b-green { border-color: var(--green); }
+  .b-blue { border-color: var(--blue); }
+  .b-red { border-color: var(--red); }
+
+  /* OVERALL PROGRESS */
+  .overall-progress {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    margin-bottom: 48px;
+  }
+
+  .overall-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .overall-label { font-size: 9px; letter-spacing: 4px; color: var(--muted); text-transform: uppercase; }
+  .overall-pct { font-size: 13px; font-weight: 700; color: var(--gold); letter-spacing: 2px; }
+
+  .overall-bar-bg { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .overall-bar-fill { height: 100%; background: var(--gold); border-radius: 2px; transition: width 0.6s ease; width: 0%; }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="wrap">
+    <div class="header-inner">
+      <div>
+        <div class="brand-name">AURVENA</div>
+        <div class="brand-sub">Capital · Powered by ORION · Tech by NARVEX</div>
+      </div>
+      <div class="header-right">
+        <div class="tag">Operation Forbes 2029</div>
+        <div class="stack-pills">
+          <div class="pill">Age 17</div>
+          <div class="pill">Chennai, IN</div>
+          <div class="pill">28 Mar → 18th Bday</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MISSION BAR -->
+<div class="mission-bar">
+  <div class="wrap">
+    <div class="mission-text">
+      ◆ ENDGAME &nbsp;—&nbsp;
+      <span>India's only multi-asset PMS platform. NSE · BSE · FX · Indices · Assets. Powered by ORION. By invitation only.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- COUNTDOWN -->
+  <div class="countdown-bar">
+    <div>
+      <div class="countdown-label">Boards End</div>
+      <div class="countdown-value" id="daysToStart">—</div>
+      <div class="countdown-sub">days until 28th March — Day 1</div>
+    </div>
+    <div>
+      <div class="countdown-label">18th Birthday</div>
+      <div class="countdown-value" id="daysToBirthday">—</div>
+      <div class="countdown-sub">days to be fully legal & ready</div>
+    </div>
+    <div>
+      <div class="countdown-label">Forbes Target</div>
+      <div class="countdown-value">2029</div>
+      <div class="countdown-sub">Forbes 30 Under 30 India</div>
+    </div>
+  </div>
+
+  <!-- OVERALL PROGRESS -->
+  <div class="overall-progress">
+    <div class="overall-top">
+      <div class="overall-label">Overall Mission Progress</div>
+      <div class="overall-pct" id="overallPct">0%</div>
+    </div>
+    <div class="overall-bar-bg">
+      <div class="overall-bar-fill" id="overallBar"></div>
+    </div>
+  </div>
+
+  <!-- ─── PHASE 1: IMMEDIATE AFTER BOARDS ─── -->
+  <div class="section">
+    <div class="section-label">Game Plan</div>
+
+    <!-- PHASE 1 -->
+    <div class="phase open" data-phase="1" data-color="gold">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-left">
+          <div class="phase-num c-gold">01</div>
+          <div class="phase-info">
+            <div class="phase-period c-gold">28th March → Month 1</div>
+            <div class="phase-title">Foundation & Domain</div>
+            <div class="phase-goal">Buy the name. Set up the machine. First commit.</div>
+          </div>
+        </div>
+        <div class="phase-right">
+          <div class="phase-progress-text" id="prog-1">0/0</div>
+          <div class="toggle-icon">▼</div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-bg"><div class="progress-bar-fill b-gold" id="bar-1" style="background:var(--gold)"></div></div>
+        </div>
+
+        <div class="task-group">
+          <div class="task-group-label">Day 1 — 28th March</div>
+          <div class="task" data-phase="1" onclick="toggleTask(this)">
+            <div class="task-check c-gold"></div>
+            <div class="task-content">
+              <div class="task-text">Buy aurvena.com + aurvena.in domains</div>
+              <div class="task-detail">GoDaddy or Cloudflare Registrar. Buy both. Never let the .com go. Budget: ₹2,000–₹5,000.</div>
+            </div>
+            <div class="task-badge b-gold c-gold">Priority 1</div>
+          </div>
+          <div class="task" data-phase="1" onclick="toggleTask(this)">
+            <div class="task-check c-gold"></div>
+            <div class="task-content">
+              <div class="task-text">Buy narvex.com + orion.aurvena.com subdomain</div>
+              <div class="task-detail">NARVEX is the tech platform. Grab narvex.com now before anyone else does.</div>
+            </div>
+            <div class="task-badge b-gold c-gold">Priority 1</div>
+          </div>
+          <div class="task" data-phase="1" onclick="toggleTask(this)">
+            <div class="task-check c-gold"></div>
+            <div class="task-content">
+              <div class="task-text">Create GitHub org: aurvena-capital</div>
+              <div class="task-detail">All code lives here. Repos: aurvena-web, narvex-platform, orion-engine. Private for now.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="1" onclick="toggleTask(this)">
+            <div class="task-check c-gold"></div>
+            <div class="task-content">
+              <div class="task-text">Set up Vercel account linked to GitHub org</div>
+              <div class="task-detail">aurvena.com points to Vercel. DNS records on Cloudflare. You already know this.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="1" onclick="toggleTask(this)">
+            <div class="task-check c-gold"></div>
+            <div class="task-content">
+              <div class="task-text">Create Supabase project: aurvena-prod</div>
+              <div class="task-detail">One Supabase org. Three projects eventually: aurvena-prod, narvex-prod, orion-prod.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="task-group">
+          <div class="task-group-label">Week 1 — Build Environment</div>
+          <div class="task" data-phase="1" onclick="toggleTask(this)">
+            <div class="task-check c-gold"></div>
+            <div class="task-content">
+              <div class="task-text">Install Claude Code + Cursor side by side</div>
+              <div class="task-detail">Claude Code for architecture & complex logic. Cursor for in-file edits and autocomplete. Use both together.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="1" onclick="toggleTask(this)">
+            <div class="task-check c-gold"></div>
+            <div class="task-content">
+              <div class="task-text">Scaffold Next.js 14 app on aurvena-web repo</div>
+              <div class="task-detail">npx create-next-app@latest. App Router. TypeScript. Tailwind. Deploy to Vercel immediately.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="1" onclick="toggleTask(this)">
+            <div class="task-check c-gold"></div>
+            <div class="task-content">
+              <div class="task-text">Launch coming soon page on aurvena.com</div>
+              <div class="task-detail">"AURVENA CAPITAL — By invitation only. Coming 2025." That's it. Dark. Minimal. The name does the work.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="1" onclick="toggleTask(this)">
+            <div class="task-check c-gold"></div>
+            <div class="task-content">
+              <div class="task-text">Open Twitter/X as @aurvena or @aurvenacapital</div>
+              <div class="task-detail">Lock the handle immediately. Post once: "AURVENA CAPITAL. Coming soon." Let curiosity do the rest.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="1" onclick="toggleTask(this)">
+            <div class="task-check c-gold"></div>
+            <div class="task-content">
+              <div class="task-text">Open LinkedIn as Aurvena Capital company page</div>
+              <div class="task-detail">This is where HNIs and institutional contacts will verify you're real. Make it look clean.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="phase" data-phase="2" data-color="green">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-left">
+          <div class="phase-num c-green">02</div>
+          <div class="phase-info">
+            <div class="phase-period c-green">Month 1 → Month 3</div>
+            <div class="phase-title">Build NARVEX MVP</div>
+            <div class="phase-goal">Ship the tech platform. Portfolio tracker goes live internally.</div>
+          </div>
+        </div>
+        <div class="phase-right">
+          <div class="phase-progress-text" id="prog-2">0/0</div>
+          <div class="toggle-icon">▼</div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-bg"><div class="progress-bar-fill" id="bar-2" style="background:var(--green)"></div></div>
+        </div>
+
+        <div class="task-group">
+          <div class="task-group-label">Layer 1 — NARVEX Core (Your Tech Platform)</div>
+          <div class="task" data-phase="2" onclick="toggleTask(this)">
+            <div class="task-check c-green"></div>
+            <div class="task-content">
+              <div class="task-text">Build auth system — Supabase Auth + Row Level Security</div>
+              <div class="task-detail">Every client gets their own isolated view. Nobody sees anyone else's portfolio. SEBI mandate.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="2" onclick="toggleTask(this)">
+            <div class="task-check c-green"></div>
+            <div class="task-content">
+              <div class="task-text">Build portfolio tracker — manual trade entry first</div>
+              <div class="task-detail">Input: stock, qty, buy price, date. Output: current value, P&L, CAGR. No broker API yet — that comes at 18.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="2" onclick="toggleTask(this)">
+            <div class="task-check c-green"></div>
+            <div class="task-content">
+              <div class="task-text">Integrate NSE/BSE live price API</div>
+              <div class="task-detail">Use NSE India unofficial API or Upstox Market Data (free tier). Real-time portfolio valuation.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="2" onclick="toggleTask(this)">
+            <div class="task-check c-green"></div>
+            <div class="task-content">
+              <div class="task-text">Build client dashboard — the "wow" screen</div>
+              <div class="task-detail">Portfolio value live. P&L today. CAGR since inception. Performance vs Nifty50. Trade log with thesis per trade.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="2" onclick="toggleTask(this)">
+            <div class="task-check c-green"></div>
+            <div class="task-content">
+              <div class="task-text">Build fund manager dashboard — your view</div>
+              <div class="task-detail">All clients in one screen. AUM total. Fee calculator. Alerts. This is your cockpit.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="2" onclick="toggleTask(this)">
+            <div class="task-check c-green"></div>
+            <div class="task-content">
+              <div class="task-text">Build PDF report generator</div>
+              <div class="task-detail">One-click monthly report per client. SEBI-compliant format. Auto-calculates returns, fees, benchmark comparison.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="task-group">
+          <div class="task-group-label">Layer 2 — ORION V0.1 (Your AI Engine)</div>
+          <div class="task" data-phase="2" onclick="toggleTask(this)">
+            <div class="task-check c-green"></div>
+            <div class="task-content">
+              <div class="task-text">ORION V0.1 — Risk alert engine</div>
+              <div class="task-detail">If any stock drops 8% → ORION fires alert to your dashboard. If portfolio drawdown exceeds 12% → ORION sends WhatsApp.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="2" onclick="toggleTask(this)">
+            <div class="task-check c-green"></div>
+            <div class="task-content">
+              <div class="task-text">ORION V0.1 — Position sizing calculator</div>
+              <div class="task-detail">Input: conviction level, risk tolerance, portfolio size. Output: exactly how many shares to buy. No guessing.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="2" onclick="toggleTask(this)">
+            <div class="task-check c-green"></div>
+            <div class="task-content">
+              <div class="task-text">ORION V0.1 — Daily market brief generator</div>
+              <div class="task-detail">Every morning ORION pulls NSE data + news, summarizes what matters for your portfolio. Powered by Claude API.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="task-group">
+          <div class="task-group-label">Trading — Build Your Track Record</div>
+          <div class="task" data-phase="2" onclick="toggleTask(this)">
+            <div class="task-check c-green"></div>
+            <div class="task-content">
+              <div class="task-text">Start paper trading on INDMoney — document every trade</div>
+              <div class="task-detail">Write a 3-line thesis for every buy. Why this stock. Target price. Stop loss. This becomes your track record narrative.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="2" onclick="toggleTask(this)">
+            <div class="task-check c-green"></div>
+            <div class="task-content">
+              <div class="task-text">Research FundedStock.io challenge rules completely</div>
+              <div class="task-detail">Read every rule. Understand drawdown limits, profit targets, consistency rules. Don't attempt until you can recite the rules.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="phase" data-phase="3" data-color="blue">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-left">
+          <div class="phase-num c-blue">03</div>
+          <div class="phase-info">
+            <div class="phase-period c-blue">Month 3 → Month 5</div>
+            <div class="phase-title">SEBI Exam + Prop Firm</div>
+            <div class="phase-goal">Pass NISM. Attempt funded account. Build credibility.</div>
+          </div>
+        </div>
+        <div class="phase-right">
+          <div class="phase-progress-text" id="prog-3">0/0</div>
+          <div class="toggle-icon">▼</div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-bg"><div class="progress-bar-fill" id="bar-3" style="background:var(--blue)"></div></div>
+        </div>
+
+        <div class="task-group">
+          <div class="task-group-label">SEBI — NISM Series XV (Research Analyst)</div>
+          <div class="task" data-phase="3" onclick="toggleTask(this)">
+            <div class="task-check c-blue"></div>
+            <div class="task-content">
+              <div class="task-text">Register on NISM portal — nism.ac.in</div>
+              <div class="task-detail">Create account. Enroll for NISM Series XV — Research Analyst. Exam fee: ₹1,500. Book slot 6 weeks ahead.</div>
+            </div>
+            <div class="task-badge b-blue c-blue">SEBI</div>
+          </div>
+          <div class="task" data-phase="3" onclick="toggleTask(this)">
+            <div class="task-check c-blue"></div>
+            <div class="task-content">
+              <div class="task-text">Study: Fundamental Analysis — complete module</div>
+              <div class="task-detail">P/E, EV/EBITDA, DCF, balance sheet reading, cash flow analysis. NISM workbook + Zerodha Varsity (free).</div>
+            </div>
+            <div class="task-badge b-blue c-blue">SEBI</div>
+          </div>
+          <div class="task" data-phase="3" onclick="toggleTask(this)">
+            <div class="task-check c-blue"></div>
+            <div class="task-content">
+              <div class="task-text">Study: Securities Markets — complete module</div>
+              <div class="task-detail">NSE/BSE structure, SEBI regulations, market participants, settlement cycles. Heavy theory but exam essential.</div>
+            </div>
+            <div class="task-badge b-blue c-blue">SEBI</div>
+          </div>
+          <div class="task" data-phase="3" onclick="toggleTask(this)">
+            <div class="task-check c-blue"></div>
+            <div class="task-content">
+              <div class="task-text">Study: Derivatives & Options — complete module</div>
+              <div class="task-detail">F&O basics, options Greeks, hedging strategies. This is what separates analysts from fund managers.</div>
+            </div>
+            <div class="task-badge b-blue c-blue">SEBI</div>
+          </div>
+          <div class="task" data-phase="3" onclick="toggleTask(this)">
+            <div class="task-check c-blue"></div>
+            <div class="task-content">
+              <div class="task-text">Complete 3 full mock tests — score 75%+ consistently</div>
+              <div class="task-detail">Pass mark is 60%. You target 80%+. When the examiner sees your score they should ask who tf this is.</div>
+            </div>
+            <div class="task-badge b-blue c-blue">SEBI</div>
+          </div>
+          <div class="task" data-phase="3" onclick="toggleTask(this)">
+            <div class="task-check c-blue"></div>
+            <div class="task-content">
+              <div class="task-text">Appear for NISM Series XV exam — PASS</div>
+              <div class="task-detail">Dress sharp. Show up 30 mins early. Certificate valid 3 years. Screenshot it. Post it.</div>
+            </div>
+            <div class="task-badge b-blue c-blue">SEBI</div>
+          </div>
+        </div>
+
+        <div class="task-group">
+          <div class="task-group-label">Prop Firm — Funded Account Challenge</div>
+          <div class="task" data-phase="3" onclick="toggleTask(this)">
+            <div class="task-check c-blue"></div>
+            <div class="task-content">
+              <div class="task-text">Attempt FundedStock.io — ₹10L account challenge</div>
+              <div class="task-detail">Start smallest tier. Learn the platform. Consistency over returns. Max 1% risk per trade. Journal every single trade.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="3" onclick="toggleTask(this)">
+            <div class="task-check c-blue"></div>
+            <div class="task-content">
+              <div class="task-text">Research Dubai prop firms — FTMO, The Funded Trader</div>
+              <div class="task-detail">For FX access. Compare challenge rules, payout structure, instruments. Pick one to attempt at 18 with USD account.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="3" onclick="toggleTask(this)">
+            <div class="task-check c-blue"></div>
+            <div class="task-content">
+              <div class="task-text">Build FX knowledge — major pairs, indices, commodities</div>
+              <div class="task-detail">USD/INR, EUR/USD, US30, NAS100, Gold, Oil. These are your instruments in the Dubai prop firm. Know them cold.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="task-group">
+          <div class="task-group-label">Content & Network</div>
+          <div class="task" data-phase="3" onclick="toggleTask(this)">
+            <div class="task-check c-blue"></div>
+            <div class="task-content">
+              <div class="task-text">Post first market analysis thread on Twitter/X</div>
+              <div class="task-detail">Pick one stock. Deep dive publicly. Why you'd buy it, at what price, stop loss. Real research. Tag @zerodha @nikhilkamathcio.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="3" onclick="toggleTask(this)">
+            <div class="task-check c-blue"></div>
+            <div class="task-content">
+              <div class="task-text">DM 5 Indian fintech founders on LinkedIn every week</div>
+              <div class="task-detail">Not "can I intern". Real question about their journey. One good connection at this age = worth 10x later.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 4 -->
+    <div class="phase" data-phase="4" data-color="red">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-left">
+          <div class="phase-num c-red">04</div>
+          <div class="phase-info">
+            <div class="phase-period c-red">Month 5 → 18th Birthday</div>
+            <div class="phase-title">Pre-18 Final Sprint</div>
+            <div class="phase-goal">Everything ready. Day of 18th = flip the switch.</div>
+          </div>
+        </div>
+        <div class="phase-right">
+          <div class="phase-progress-text" id="prog-4">0/0</div>
+          <div class="toggle-icon">▼</div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-bg"><div class="progress-bar-fill" id="bar-4" style="background:var(--red)"></div></div>
+        </div>
+
+        <div class="task-group">
+          <div class="task-group-label">Legal Prep — Ready to File Day 1 of 18</div>
+          <div class="task" data-phase="4" onclick="toggleTask(this)">
+            <div class="task-check c-red"></div>
+            <div class="task-content">
+              <div class="task-text">Research CA/CS for company registration — get quotes</div>
+              <div class="task-detail">Private Limited registration = ₹8,000–₹15,000 via CA. Get 3 quotes. Choose one before birthday so you file same week.</div>
+            </div>
+            <div class="task-badge b-red c-red">Legal</div>
+          </div>
+          <div class="task" data-phase="4" onclick="toggleTask(this)">
+            <div class="task-check c-red"></div>
+            <div class="task-content">
+              <div class="task-text">Prepare all KYC documents in advance</div>
+              <div class="task-detail">PAN card, Aadhaar, address proof, passport photos — all scanned, organized. Parents' documents too if co-founder.</div>
+            </div>
+            <div class="task-badge b-red c-red">Legal</div>
+          </div>
+          <div class="task" data-phase="4" onclick="toggleTask(this)">
+            <div class="task-check c-red"></div>
+            <div class="task-content">
+              <div class="task-text">Draft company name options for MCA portal</div>
+              <div class="task-detail">AURVENA CAPITAL PRIVATE LIMITED. Have 3 backup names ready. MCA checks availability. First come first served.</div>
+            </div>
+            <div class="task-badge b-red c-red">Legal</div>
+          </div>
+          <div class="task" data-phase="4" onclick="toggleTask(this)">
+            <div class="task-check c-red"></div>
+            <div class="task-content">
+              <div class="task-text">Research SEBI Research Analyst registration requirements</div>
+              <div class="task-detail">After NISM pass + 18th birthday + company = eligible to apply. Fee: ₹5,000. Know the exact checklist.</div>
+            </div>
+            <div class="task-badge b-red c-red">Legal</div>
+          </div>
+        </div>
+
+        <div class="task-group">
+          <div class="task-group-label">NARVEX — Platform Feature Complete</div>
+          <div class="task" data-phase="4" onclick="toggleTask(this)">
+            <div class="task-check c-red"></div>
+            <div class="task-content">
+              <div class="task-text">NARVEX V1 — full client onboarding flow live</div>
+              <div class="task-detail">Client signs up → KYC form → agreement upload → portfolio assigned → dashboard access. End to end.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="4" onclick="toggleTask(this)">
+            <div class="task-check c-red"></div>
+            <div class="task-content">
+              <div class="task-text">NARVEX — WhatsApp notification system via Twilio</div>
+              <div class="task-detail">ORION fires → Twilio → client's WhatsApp. "Your portfolio hit +20% today. — AURVENA Capital." That's the experience.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="4" onclick="toggleTask(this)">
+            <div class="task-check c-red"></div>
+            <div class="task-content">
+              <div class="task-text">NARVEX — Fee calculation engine automated</div>
+              <div class="task-detail">2% management fee auto-calculated monthly. 20% performance fee above hurdle rate. Invoice generated automatically.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="4" onclick="toggleTask(this)">
+            <div class="task-check c-red"></div>
+            <div class="task-content">
+              <div class="task-text">NARVEX security audit — pen test the platform</div>
+              <div class="task-detail">Client financial data = highest security standard. Row Level Security on Supabase. No client can see another's data.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="task-group">
+          <div class="task-group-label">ORION — Intelligence Layer</div>
+          <div class="task" data-phase="4" onclick="toggleTask(this)">
+            <div class="task-check c-red"></div>
+            <div class="task-content">
+              <div class="task-text">ORION V1 — multi-asset monitoring live</div>
+              <div class="task-detail">Tracks NSE equities + FX pairs + Nifty indices simultaneously. Single dashboard view. This is your competitive moat.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="4" onclick="toggleTask(this)">
+            <div class="task-check c-red"></div>
+            <div class="task-content">
+              <div class="task-text">ORION V1 — Claude API powered research assistant</div>
+              <div class="task-detail">Ask ORION: "analyse HDFC Bank for portfolio fit" → ORION pulls data + Claude API → structured research brief in 30 seconds.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="task-group">
+          <div class="task-group-label">Brand & Network — Pre-Launch</div>
+          <div class="task" data-phase="4" onclick="toggleTask(this)">
+            <div class="task-check c-red"></div>
+            <div class="task-content">
+              <div class="task-text">aurvena.com full website live</div>
+              <div class="task-detail">Home: who we are. Approach: how ORION works. By Invitation: waitlist form for first 10 clients. That's it. No fluff.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="4" onclick="toggleTask(this)">
+            <div class="task-check c-red"></div>
+            <div class="task-content">
+              <div class="task-text">10 people on the waitlist before 18th birthday</div>
+              <div class="task-detail">Family first. Then family friends. Then Twitter followers. 10 people waiting = you have a business on day 1.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="4" onclick="toggleTask(this)">
+            <div class="task-check c-red"></div>
+            <div class="task-content">
+              <div class="task-text">500+ Twitter/X followers on @aurvenacapital</div>
+              <div class="task-detail">Consistent posting. One thread per week minimum. Market analysis, trade thesis, ORION insights. Quality over quantity.</div>
+            </div>
+          </div>
+          <div class="task" data-phase="4" onclick="toggleTask(this)">
+            <div class="task-check c-red"></div>
+            <div class="task-content">
+              <div class="task-text">Verified 6-month personal trading track record</div>
+              <div class="task-detail">Every trade logged in NARVEX. Returns calculated vs Nifty50. This is your pitch to first clients. No track record = no clients.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── TECH STACK ─── -->
+  <div class="section">
+    <div class="section-label">The Three Layers</div>
+    <div class="stack-grid">
+      <div class="stack-card">
+        <div class="stack-card-name c-gold">AURVENA</div>
+        <div class="stack-card-role">Holding · The Face</div>
+        <ul class="stack-card-items">
+          <li>The brand HNIs & UHNIs see</li>
+          <li>PMS license holder</li>
+          <li>Client relationships</li>
+          <li>AUM & fee revenue</li>
+          <li>By invitation only</li>
+          <li>aurvena.com</li>
+        </ul>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-name c-green">NARVEX</div>
+        <div class="stack-card-role">Tech Platform · The Machine</div>
+        <ul class="stack-card-items">
+          <li>Portfolio management SaaS</li>
+          <li>Client dashboard</li>
+          <li>License to other PMS firms</li>
+          <li>Next.js + Supabase + Vercel</li>
+          <li>India's answer to Aladdin</li>
+          <li>narvex.com</li>
+        </ul>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-name c-blue">ORION</div>
+        <div class="stack-card-role">AI Engine · The Brain</div>
+        <ul class="stack-card-items">
+          <li>Risk monitoring 24/7</li>
+          <li>Position sizing logic</li>
+          <li>Multi-asset intelligence</li>
+          <li>Claude API powered</li>
+          <li>Daily market briefs</li>
+          <li>orion.aurvena.com</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── TOOLS ─── -->
+  <div class="section">
+    <div class="section-label">Build Stack</div>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-icon">⚡</div>
+        <div>
+          <div class="tool-name">CLAUDE CODE</div>
+          <div class="tool-use">Primary build tool. Architecture, complex logic, entire feature builds. Prompt it with full context of the AURVENA stack. It knows the codebase.</div>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🖱️</div>
+        <div>
+          <div class="tool-name">CURSOR</div>
+          <div class="tool-use">In-file editing, autocomplete, quick fixes. Use alongside Claude Code. Cursor for speed, Claude Code for architecture.</div>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🗄️</div>
+        <div>
+          <div class="tool-name">SUPABASE</div>
+          <div class="tool-use">Auth, Postgres DB, Row Level Security, Edge Functions, Storage. One platform for entire backend. You already know this.</div>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">▲</div>
+        <div>
+          <div class="tool-name">VERCEL</div>
+          <div class="tool-use">Deploy everything. aurvena.com, narvex.com. Instant deploys on push. You already know this. Zero config.</div>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🐙</div>
+        <div>
+          <div class="tool-name">GITHUB</div>
+          <div class="tool-use">Org: aurvena-capital. Repos: aurvena-web, narvex-platform, orion-engine. Private. Version controlled from day 1.</div>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🧠</div>
+        <div>
+          <div class="tool-name">CLAUDE API</div>
+          <div class="tool-use">Powers ORION's intelligence. Research briefs, risk analysis, market summaries. claude-sonnet-4 model. This is the brain of the brain.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SEBI ─── -->
+  <div class="section">
+    <div class="section-label">SEBI Exam Strategy</div>
+    <div class="sebi-grid">
+      <div class="sebi-card">
+        <div class="sebi-card-title c-blue">NISM Series XV</div>
+        <div class="sebi-item"><span>Exam</span>Research Analyst Certification</div>
+        <div class="sebi-item"><span>Fee</span>₹1,500</div>
+        <div class="sebi-item"><span>Pass</span>60% — you target 80%+</div>
+        <div class="sebi-item"><span>Valid</span>3 years</div>
+        <div class="sebi-item"><span>Study</span>NISM workbook + Varsity</div>
+        <div class="sebi-item"><span>Mock</span>3 full tests before exam</div>
+        <div class="sebi-item"><span>Timeline</span>Month 3–4</div>
+      </div>
+      <div class="sebi-card">
+        <div class="sebi-card-title c-gold">Key Topics to Destroy</div>
+        <div class="sebi-item"><span>Topic 1</span>Securities Markets & SEBI regulations</div>
+        <div class="sebi-item"><span>Topic 2</span>Fundamental Analysis — ratios, DCF</div>
+        <div class="sebi-item"><span>Topic 3</span>Technical Analysis — charts, indicators</div>
+        <div class="sebi-item"><span>Topic 4</span>Derivatives — F&O, options Greeks</div>
+        <div class="sebi-item"><span>Topic 5</span>Portfolio Management theory</div>
+        <div class="sebi-item"><span>Topic 6</span>Compliance & ethics (SEBI loves this)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── DOMAINS ─── -->
+  <div class="section">
+    <div class="section-label">Domain War Chest</div>
+    <div class="domain-list">
+      <div class="domain-item">
+        <div class="domain-name c-gold">aurvena.com</div>
+        <div class="domain-right">
+          <div class="domain-note">Buy on 28th March. First thing.</div>
+          <div class="domain-priority b-red c-red">Day 1</div>
+        </div>
+      </div>
+      <div class="domain-item">
+        <div class="domain-name c-gold">aurvena.in</div>
+        <div class="domain-right">
+          <div class="domain-note">Indian TLD. For regulatory filings.</div>
+          <div class="domain-priority b-red c-red">Day 1</div>
+        </div>
+      </div>
+      <div class="domain-item">
+        <div class="domain-name c-green">narvex.com</div>
+        <div class="domain-right">
+          <div class="domain-note">NARVEX tech platform brand.</div>
+          <div class="domain-priority b-red c-red">Day 1</div>
+        </div>
+      </div>
+      <div class="domain-item">
+        <div class="domain-name c-muted">aurvenacapital.com</div>
+        <div class="domain-right">
+          <div class="domain-note">Grab as backup. Redirect to aurvena.com</div>
+          <div class="domain-priority b-gold c-gold">Week 1</div>
+        </div>
+      </div>
+      <div class="domain-item">
+        <div class="domain-name c-muted">narvex.in</div>
+        <div class="domain-right">
+          <div class="domain-note">Indian TLD for NARVEX.</div>
+          <div class="domain-priority b-gold c-gold">Week 1</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">
+      <span>AURVENA CAPITAL</span> · Powered by ORION · Technology by NARVEX
+    </div>
+    <div class="footer-right">By invitation only · Forbes 2029 · 🖤</div>
+  </footer>
+
+</div>
+
+<script>
+  // ─── COUNTDOWN ───
+  function updateCountdown() {
+    const now = new Date();
+    const day1 = new Date('2026-03-28');
+    const birthday = new Date('2026-09-28'); // update with actual birthday
+
+    const msPerDay = 86400000;
+
+    const daysToStart = Math.max(0, Math.ceil((day1 - now) / msPerDay));
+    const daysToBirthday = Math.max(0, Math.ceil((birthday - now) / msPerDay));
+
+    document.getElementById('daysToStart').textContent = daysToStart;
+    document.getElementById('daysToBirthday').textContent = daysToBirthday;
+  }
+
+  updateCountdown();
+
+  // ─── PHASE TOGGLE ───
+  function togglePhase(header) {
+    const phase = header.closest('.phase');
+    phase.classList.toggle('open');
+  }
+
+  // ─── TASK TOGGLE ───
+  function toggleTask(task) {
+    task.classList.toggle('done');
+    saveState();
+    updateProgress();
+  }
+
+  // ─── PROGRESS ───
+  function updateProgress() {
+    let totalTasks = 0;
+    let totalDone = 0;
+
+    [1, 2, 3, 4].forEach(p => {
+      const tasks = document.querySelectorAll(`.task[data-phase="${p}"]`);
+      const done = document.querySelectorAll(`.task[data-phase="${p}"].done`);
+      const count = tasks.length;
+      const doneCount = done.length;
+
+      totalTasks += count;
+      totalDone += doneCount;
+
+      const pct = count > 0 ? (doneCount / count) * 100 : 0;
+      const bar = document.getElementById(`bar-${p}`);
+      const prog = document.getElementById(`prog-${p}`);
+      if (bar) bar.style.width = pct + '%';
+      if (prog) prog.textContent = `${doneCount}/${count}`;
+    });
+
+    const overallPct = totalTasks > 0 ? Math.round((totalDone / totalTasks) * 100) : 0;
+    document.getElementById('overallPct').textContent = overallPct + '%';
+    document.getElementById('overallBar').style.width = overallPct + '%';
+  }
+
+  // ─── PERSISTENCE (localStorage) ───
+  function saveState() {
+    const tasks = document.querySelectorAll('.task');
+    const state = {};
+    tasks.forEach((task, i) => {
+      state[i] = task.classList.contains('done');
+    });
+    try { localStorage.setItem('aurvena-tasks', JSON.stringify(state)); } catch(e) {}
+  }
+
+  function loadState() {
+    try {
+      const saved = localStorage.getItem('aurvena-tasks');
+      if (!saved) return;
+      const state = JSON.parse(saved);
+      const tasks = document.querySelectorAll('.task');
+      tasks.forEach((task, i) => {
+        if (state[i]) task.classList.add('done');
+      });
+    } catch(e) {}
+  }
+
+  // ─── INIT ───
+  loadState();
+  updateProgress();
+</script>
+</body>
+</html>
